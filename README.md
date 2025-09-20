@@ -26,7 +26,7 @@ The PSP Photo application displays images in chronological order based on file t
 
 ### Step 1: Set Timestamps for PSP Compatibility (Important!)
 ```bash
-# Set 1-minute increments between files starting from midnight today
+# Set 1-minute increments between files starting from yesterday at midnight
 ./set_timestamps.sh ~/path/to/your/images
 
 # Or set a specific start time

@@ -14,7 +14,7 @@ show_usage() {
     echo "OPTIONS:"
     echo "  -h, --help     Show this help message"
     echo "  -v, --verbose  Verbose output"
-    echo "  -s, --start    Start time (YYYY-MM-DD HH:MM format, defaults to midnight today)"
+    echo "  -s, --start    Start time (YYYY-MM-DD HH:MM format, defaults to yesterday at midnight)"
     echo ""
     echo "DIRECTORY: Directory containing .jpg files to timestamp"
     echo ""
@@ -77,8 +77,8 @@ fi
 
 # Set start time
 if [[ -z "$START_TIME" ]]; then
-    # Use midnight of current date as starting point (safer than current time)
-    START_TIME=$(date +"%Y-%m-%d 00:00")
+    # Use yesterday at midnight of current date as starting point (safer than current time)
+    START_TIME=$(date -v-1d +"%Y-%m-%d 00:00")
 fi
 
 echo "PSP Timestamp Setter"
