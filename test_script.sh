@@ -70,3 +70,4 @@ echo ""
 
 echo "The script will create organized files in: $TEST_DIR/PSP_Organized/"
 echo "Each comic will have its own folder with pages numbered 001.jpg, 002.jpg, etc."
+

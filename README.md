@@ -24,62 +24,99 @@ The PSP Photo application displays images in chronological order based on file t
 
 ## Usage
 
-### Step 1: Set Timestamps for PSP Compatibility (Important!)
+### Complete Solution (Recommended)
+Use the new unified script that combines all functionality:
+
+```bash
+# Full pipeline: convert, organize, and set timestamps
+./psp_photo_organizer.sh /path/to/your/images
+
+# Comic book mode with timestamps
+./psp_photo_organizer.sh -c -t /path/to/comic/pages
+
+# Batch processing multiple comics with all features
+./psp_photo_organizer.sh -c -b -t /path/to/comics/library
+
+# Custom settings
+./psp_photo_organizer.sh -v -q 85 -s "2025-01-01 12:00" /images
+```
+
+### Individual Scripts (Legacy)
+The original scripts are still available for specific use cases:
+
+#### Step 1: Convert Images (Optional)
+```bash
+# Convert various image formats to JPG and compress
+./01-jpg_convert_compress.sh
+```
+
+#### Step 2: Set Timestamps for PSP Compatibility (Important!)
 ```bash
 # Set 1-minute increments between files starting from yesterday at midnight
-./set_timestamps.sh ~/path/to/your/images
+./03-set_timestamps.sh ~/path/to/your/images
 
 # Or set a specific start time
-./set_timestamps.sh -s "2025-01-01 12:00" ~/path/to/your/images
+./03-set_timestamps.sh -s "2025-01-01 12:00" ~/path/to/your/images
 ```
 
-### Step 2: Organize Files
-
-### Basic Usage
+#### Step 3: Organize Files
 ```bash
-./organize_for_psp.sh /path/to/your/images
+# Basic organization
+./02-organize_for_psp.sh /path/to/your/images
+
+# Comic book mode (Recommended for Comics)
+./02-organize_for_psp.sh -c /path/to/comic/pages
+
+# Batch mode (Multiple Comics)
+./02-organize_for_psp.sh -c -b /path/to/comics/library
 ```
 
-### Comic Book Mode (Recommended for Comics)
+### Unified Script Options
 ```bash
-./organize_for_psp.sh -c /path/to/comic/pages
-```
-
-### Batch Mode (Multiple Comics)
-```bash
-./organize_for_psp.sh -c -b /path/to/comics/library
-```
-
-### Full Options
-```bash
-./organize_for_psp.sh [OPTIONS] SOURCE_DIR [TARGET_DIR]
+./psp_photo_organizer.sh [OPTIONS] SOURCE_DIR [TARGET_DIR]
 
 Options:
-  -h, --help          Show help message
-  -c, --comic-mode    Enable comic book mode (sequential numbering)
-  -p, --preserve-dates Preserve original file dates
-  -v, --verbose       Verbose output
-  -b, --batch         Process subdirectories as separate comics
+  -h, --help              Show this help message
+  -v, --verbose           Verbose output
+  -c, --comic-mode        Enable comic book mode (sequential numbering)
+  -b, --batch             Process subdirectories as separate comics
+  -p, --preserve-dates    Preserve original file dates during organization
+  -t, --timestamps        Set 1-minute increment timestamps for PSP compatibility
+  -s, --start-time TIME   Start time for timestamps (YYYY-MM-DD HH:MM, defaults to yesterday midnight)
+  -q, --quality PERCENT   JPG quality for conversion (default: 80)
+  --no-convert            Skip image conversion step
 ```
 
 ## Examples
 
 ### Single Comic Book
 ```bash
-# Organize pages of a single comic book
-./organize_for_psp.sh -c ~/Downloads/Comic_Book_Pages
+# Complete processing: convert, organize as comic, and set timestamps
+./psp_photo_organizer.sh -c -t ~/Downloads/Comic_Book_Pages
 ```
 
 ### Multiple Comic Books
 ```bash
-# Process a library of comic books (each subdirectory becomes an album)
-./organize_for_psp.sh -c -b ~/Downloads/Comic_Library
+# Batch process a library of comic books with full optimization
+./psp_photo_organizer.sh -c -b -t ~/Downloads/Comic_Library
 ```
 
 ### Photo Collection
 ```bash
-# Organize regular photos by date
-./organize_for_psp.sh ~/Pictures/Vacation_Photos
+# Organize regular photos with PSP timestamp optimization
+./psp_photo_organizer.sh -t ~/Pictures/Vacation_Photos
+```
+
+### Advanced Usage
+```bash
+# High quality conversion with custom timestamp start
+./psp_photo_organizer.sh -v -q 90 -s "2025-01-01 10:00" ~/Pictures/Photos
+
+# Comic mode with timestamps, no conversion (already JPG)
+./psp_photo_organizer.sh -c -t --no-convert ~/Already_JPG_Comic
+
+# Batch processing with verbose output
+./psp_photo_organizer.sh -c -b -t -v ~/Comic_Library
 ```
 
 ## For PSP Use
