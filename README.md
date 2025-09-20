@@ -1,6 +1,7 @@
 # PSP Photo Organizer
 
 A macOS shell script to organize .jpg files for optimal viewing on PlayStation Portable (PSP) devices.
+(Ideal for reading comics/manga)
 
 ## About PSP Image Organization
 
